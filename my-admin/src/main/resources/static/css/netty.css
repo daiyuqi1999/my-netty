@@ -1,0 +1,65 @@
+#name1 {
+    width: 150px;
+}
+
+#message {
+    width: 850px;
+    height: 300px;
+}
+
+#responseText {
+    width: 1200px;
+    height: 700px;
+    border: 0;
+    font-size: x-large;
+}
+
+#name1, #message, #responseText {
+    background-color: transparent;
+    color: #666464;
+}
+
+#frosted-glass {
+    margin-left: 300px;
+    position: absolute;
+}
+
+#ncenter, #frosted-glass {
+    margin-left: 360px;
+    width: 1200px;
+}
+
+#frosted-glass:after {
+    width: 1250px;
+    height: 1000px;
+    background-position: center top;
+    -webkit-filter: blur(20px);
+    -moz-filter: blur(20px);
+    -ms-filter: blur(20px);
+    -o-filter: blur(20px);
+    filter: blur(20px);
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(255, 255, 255, 0.8);
+    z-index: -1;
+}
+
+#frosted-glass:after, body {
+    background-image: url("../images/MISAKA.png");
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+body {
+    background-repeat: no-repeat;
+    overflow: hidden;
+}
+
+#ncenter {
+    position: relative;
+    display: block;
+}

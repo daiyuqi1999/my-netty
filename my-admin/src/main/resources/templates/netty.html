@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml;http://www.thymeleaf.org">
+<head>
+    <script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script type="text/javascript" src="js/netty.js"></script>
+    <link rel="stylesheet" th:href="@{https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{css/netty.css}">
+    <meta charset="UTF-8">
+    <title>WebSocket</title>
+</head>
+<body>
+<form align="center" onsubmit="return false;">
+    <div id="frosted-glass" align="center"></div>
+    <div id="ncenter" align="center" class="form-group container">
+        <h1 class="page-header">学园都市信息系统</h1>
+        <textarea id="responseText" class="form-control" readonly></textarea><br>
+        <div id="inName">
+            <input type="text" id="name1" class="form-control" placeholder="请输入用户名" >
+        </div>
+        <input type="text" id="message1" name="message" class="form-control" placeholder="请输入信息">
+        <div class="btn-group">
+            <button class="btn btn-primary btn-sm btn-default"
+                    onclick="send('['+this.form.name1.value+'] '+this.form.message.value)">发送</button>
+            <button class="btn btn-primary btn-sm btn-default" onclick="refresh2()">清空</button>
+            <button class="btn btn-primary btn-sm btn-default" onclick="refresh1()">刷新</button>
+        </div>
+    </div>
+</form>
+</body>
+</html>
