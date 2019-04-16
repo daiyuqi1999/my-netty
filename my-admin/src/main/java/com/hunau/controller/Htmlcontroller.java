@@ -14,12 +14,12 @@ import java.util.concurrent.Callable;
 @Controller
 public class Htmlcontroller {
 
-    @RequestMapping(value = "/") // 将index.html设置为主界面
+    @RequestMapping(value = "/")
     public Callable<String> index() {
         Callable<String> callable = new Callable<String>() {
             @Override
             public String call() throws Exception {
-                return "netty";
+                return "index";
             }
         };
         return callable;
