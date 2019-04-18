@@ -8,7 +8,7 @@
 		<version>0.0.1-SNAPSHOT</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.hunau.server</groupId>
+	<groupId>com.hunau.client</groupId>
 	<artifactId>my-client</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>my-client</name>
@@ -28,6 +28,11 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>io.netty</groupId>
+			<artifactId>netty-all</artifactId>
+			<version>4.1.31.Final</version>
 		</dependency>
 	</dependencies>
 
