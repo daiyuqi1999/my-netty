@@ -14,27 +14,27 @@ import java.util.Date;
 /**
  * Created by MI on 2019/3/2.
  */
-public class BroadcastMain {
-    private static final Logger log = LoggerFactory.getLogger(BroadcastMain.class);
+public class ServerMain {
+    private static final Logger log = LoggerFactory.getLogger(ServerMain.class);
 
     public static void main(String[] args) {
-        broadcastMain();
+        ServerMain();
     }
 
-    public static void broadcastMain() {
+    public static void ServerMain() {
         EventLoopGroup bossGroup = new NioEventLoopGroup();
         EventLoopGroup workGroup = new NioEventLoopGroup();
         try {
             ServerBootstrap b = new ServerBootstrap();
             b.group(bossGroup, workGroup);
             b.channel(NioServerSocketChannel.class);
-            b.childHandler(new BroadcastSocketChannelHandler());
+            b.childHandler(new ServerSocketChannelHandler());
             SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");//设置日期格式
             String date = df.format(new Date());// new Date()为获取当前系统时间，也可使用当前时间戳
             //System.out.println(date + "  服务端开启等待客户端连接...");
-            log.info("NettyService对象host: " + BroadcastConfig.WEB_SOCKET_URL);
+            log.info("NettyService对象host: " + ServerConfig.WEB_SOCKET_URL);
             log.info("服务端开启等待客户端连接...");
-            Channel ch = b.bind(BroadcastConfig.port).sync().channel();
+            Channel ch = b.bind(ServerConfig.port).sync().channel();
             ch.closeFuture().sync();
         } catch (Exception e) {
             e.printStackTrace();

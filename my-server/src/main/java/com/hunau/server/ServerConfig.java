@@ -7,7 +7,7 @@ import io.netty.util.concurrent.GlobalEventExecutor;
 /**
  * Created by MI on 2019/3/2.
  */
-public class BroadcastConfig {
+public class ServerConfig {
     // 储存每一个客户端接入进来时的channel对象
     public static ChannelGroup group = new DefaultChannelGroup(GlobalEventExecutor.INSTANCE);
     // 服务器端号

@@ -19,10 +19,10 @@ import java.util.Date;
  * Created by MI on 2019/3/2.
  * 接受/处理/响应webSocket请求的核心业务处理类
  */
-public class BroadcastSoketHandler extends SimpleChannelInboundHandler<Object> {
+public class ServerSoketHandler extends SimpleChannelInboundHandler<Object> {
 
     private WebSocketServerHandshaker handshaker;
-    private static final Logger log = LoggerFactory.getLogger(BroadcastSoketHandler.class);
+    private static final Logger log = LoggerFactory.getLogger(ServerSoketHandler.class);
 
 
     /**
@@ -32,10 +32,10 @@ public class BroadcastSoketHandler extends SimpleChannelInboundHandler<Object> {
     @Override
     public void handlerAdded(ChannelHandlerContext ctx) throws Exception { // (2)
         Channel incoming = ctx.channel();
-        for (Channel channel : BroadcastConfig.group) {
+        for (Channel channel : ServerConfig.group) {
             channel.writeAndFlush("[SERVER] - " + incoming.remoteAddress() + " 加入\n");
         }
-        BroadcastConfig.group.add(ctx.channel());
+        ServerConfig.group.add(ctx.channel());
     }
 
     /*
@@ -45,10 +45,10 @@ public class BroadcastSoketHandler extends SimpleChannelInboundHandler<Object> {
     @Override
     public void handlerRemoved(ChannelHandlerContext ctx) throws Exception {
         Channel incoming = ctx.channel();
-        for (Channel channel : BroadcastConfig.group) {
+        for (Channel channel : ServerConfig.group) {
             channel.writeAndFlush("[SERVER] - " + incoming.remoteAddress() + " 离开\n");
         }
-        BroadcastConfig.group.remove(ctx.channel());
+        ServerConfig.group.remove(ctx.channel());
     }
 
     /**
@@ -135,7 +135,7 @@ public class BroadcastSoketHandler extends SimpleChannelInboundHandler<Object> {
         if (frame instanceof TextWebSocketFrame) {
             TextWebSocketFrame msg = (TextWebSocketFrame) frame;
             Channel incoming = ctx.channel();
-            for (Channel channel : BroadcastConfig.group) {
+            for (Channel channel : ServerConfig.group) {
                 SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
                 String date = df.format(new Date());// new Date()为获取当前系统时间，也可使用当前时间戳
                 if (channel != incoming) {
@@ -163,7 +163,7 @@ public class BroadcastSoketHandler extends SimpleChannelInboundHandler<Object> {
                     new DefaultFullHttpResponse(HttpVersion.HTTP_1_1, HttpResponseStatus.BAD_REQUEST));
             return;
         }
-        WebSocketServerHandshakerFactory wsFactory = new WebSocketServerHandshakerFactory(BroadcastConfig.WEB_SOCKET_URL,
+        WebSocketServerHandshakerFactory wsFactory = new WebSocketServerHandshakerFactory(ServerConfig.WEB_SOCKET_URL,
                 null, false);
         handshaker = wsFactory.newHandshaker(req);
         if (handshaker == null) {
