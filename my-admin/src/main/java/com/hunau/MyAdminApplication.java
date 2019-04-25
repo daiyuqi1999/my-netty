@@ -11,7 +11,7 @@ public class MyAdminApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(MyAdminApplication.class, args);
-        ServerMain.ServerMain();
+        ServerMain.start();
 	}
 
 }

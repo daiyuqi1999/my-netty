@@ -36,7 +36,6 @@ function send(message) { // 发送按钮功能设置
         if ($.trim($(name1).val()) == '' || $.trim($(message1).val()) == '') {
             window.alert("信息和用户名不能为空!");
         } else {
-            insert();
             socket.send(message);
         }
     } else {
@@ -44,30 +43,6 @@ function send(message) { // 发送按钮功能设置
     }
 }
 
-function insert() {
-    var ObjectMessage = new Object();
-    ObjectMessage.name = $.trim($(name1).val());
-    ObjectMessage.text = $.trim($(message1).val());
-    ObjectMessage.time = getdate();
-    $.ajax({
-        type: 'GET',
-        url: "messageInsert",
-        contentType: 'application/json',
-        timeout: 1000,
-        data: {ObjectMessage: JSON.stringify(ObjectMessage)},
-        dataType: 'text',
-        success: function (result) {
-            if (result == "success") {
-            } else {
-                window.alert('传输错误, 请稍后重试. ');
-            }
-        },
-        error: function () {
-            window.alert('传输错误, 请稍后重试. ');
-        }
-    })
-
-}
 
 function getdate() {
     var now = new Date(),
