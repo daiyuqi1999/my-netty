@@ -22,12 +22,10 @@ public class ServerChannelHandler extends ChannelInitializer<SocketChannel> {
 
     @Override
     protected void initChannel(SocketChannel ch) throws Exception {
-        ChannelPipeline pipeline = ch.pipeline();
-        pipeline.addLast("framer", new DelimiterBasedFrameDecoder(8192, Delimiters.lineDelimiter()));
-        pipeline.addLast("decoder", new StringDecoder());
-        pipeline.addLast("encoder", new StringEncoder());
-        pipeline.addLast("handler", new ServerHandler());
-        log.info("SimpleChatClient:" + ch.remoteAddress() + "连接上");
+        ch.pipeline().addLast("http-codec", new HttpServerCodec());
+        ch.pipeline().addLast("aggregator", new HttpObjectAggregator(65536));
+        ch.pipeline().addLast("http-chunket", new ChunkedWriteHandler());
+        ch.pipeline().addLast("handler", new ServerHandler());
     }
 
 }
